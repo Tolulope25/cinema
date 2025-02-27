@@ -28,6 +28,7 @@
 
     <!-- Dark Mode Navbar -->
     <header>
+<<<<<<< HEAD
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <!-- Logo -->
@@ -91,6 +92,65 @@
             </div>
         </nav>
 
+=======
+        
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <!-- Logo -->
+                <a href="#" class="navbar-brand fs-3 fw-bold text-warning">Cinema <span class="text-white">World</span></a>
+
+                <!-- Navbar Toggler for Small Screens -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="{{ route('home') }}" class="nav-link text-white fw-semibold">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('about') }}" class="nav-link text-white fw-semibold">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-white fw-semibold">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-white fw-semibold">Book Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('now.showing') }}" class="nav-link text-white fw-semibold">Now Showing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('upcoming') }}" class="nav-link text-white fw-semibold">Upcoming Movies</a>
+                        </li>
+
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login') || Route::has('register'))
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle text-white fw-semibold" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Login / Register
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        @if (Route::has('login'))
+                                            <li><a href="{{ route('login') }}" class="dropdown-item">Login</a></li>
+                                        @endif
+                                        @if (Route::has('register'))
+                                            <li><a href="{{ route('register') }}" class="dropdown-item">Register</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ route('logout') }}" class="nav-link text-white fw-semibold">Logout</a>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </nav>
+>>>>>>> origin/master
 
     </header>
 

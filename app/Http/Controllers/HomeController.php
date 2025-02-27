@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Movie;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 
+=======
+>>>>>>> origin/master
 
 class HomeController extends Controller
 {
     public function home(){
         $movie = Movie::all();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         return view ('home', compact('movie'));
     }
 

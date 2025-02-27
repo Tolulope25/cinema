@@ -162,7 +162,10 @@
     {{ dd($movie->release_date, $movie->end_date) }}
 @endforeach --}}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     <tr class="hover:bg-gray-50">
             <td class="px-4 py-3 font-semibold text-gray-800">{{ $movie->id }}</td>
             <td class="px-4 py-3 text-center">{{ $movie->title }}</td>

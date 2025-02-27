@@ -36,20 +36,17 @@ Route::get('now-showing', [AdminController::class, 'nowShowing'])->name('now.sho
 Route::get('upcoming', [AdminController::class, 'getUpcomingMovies'])->name('upcoming');
 Route::get('movie-show/{id}', [HomeController::class, 'showMovie'])->name('movie.show');
 
+Route::get('admin/create-genre', [AdminController::class, 'createGenre'])->name('create.genre');
+Route::get('admin/create-movies', [AdminController::class, 'createMovies'])->name('create.genre');
+Route::get('admin/create-languages', [AdminController::class, 'createLanguages'])->name('create.language');
+Route::get('admin/edit-movies/{id}', [AdminController::class, 'editMovies'])->name('edit.movies');
+Route::get('delete-movies/{id}', [AdminController::class, 'delete'])->name('delete.movies');
+Route::post('store-movies', [AdminController::class, 'storeMovie'])->name('send.movie');
+Route::post('store-genre', [AdminController::class, 'storeGenre'])->name('send.genre');
+Route::post('store-language', [AdminController::class, 'storeLanguage'])->name('send.language');
 
-
-    Route::get('admin/create-genre', [AdminController::class, 'createGenre'])->name('create.genre');
-    Route::get('admin/create-movies', [AdminController::class, 'createMovies'])->name('create.movies');
-    Route::get('admin/create-languages', [AdminController::class, 'createLanguages'])->name('create.language');
-    Route::get('admin/edit-movies/{id}', [AdminController::class, 'editMovies'])->name('edit.movies');
-    Route::get('delete-movies/{id}', [AdminController::class, 'delete'])->name('delete.movies');
-    Route::post('store-movies', [AdminController::class, 'storeMovie'])->name('send.movie');
-    Route::post('store-genre', [AdminController::class, 'storeGenre'])->name('send.genre');
-    Route::post('store-language', [AdminController::class, 'storeLanguage'])->name('send.language');
-
-    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-    Route::put('users/update-role', [DashboardController::class, 'updateUserRole'])->name('update.user');
-
+Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::put('users/update-role', [DashboardController::class, 'updateUserRole'])->name('update.user');
 
 
 
@@ -61,7 +58,7 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login-User', [AuthController::class, 'loginUser'])->name('login.user');
 Route::post('register-User', [AuthController::class, 'registerUser'])->name('register.user');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('show/{id}', [MovieController::class, 'show'])->name('movies.show');
 
