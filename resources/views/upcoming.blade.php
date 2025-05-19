@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 @if (session()->has('error'))
 <div style="padding: 1rem; margin-bottom: 2rem; background-color: #fff4f4; border-radius: 8px; border: 1px solid #fecaca; color: #991b1b; position: relative;">
@@ -15,6 +14,12 @@
     <button type="button" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #166534; cursor: pointer;" data-bs-dismiss="alert" aria-label="close">&times;</button>
 </div>
 @endif
+
+@if ($upcomingMovies->isEmpty())
+<div style="text-align: center; padding: 2rem; background-color: #f3f4f6; border-radius: 8px; margin-bottom: 2rem;">
+    <p style="font-size: 1.25rem; color: #555;">There are no upcoming movies at the moment.</p>
+</div>
+@else
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
     @foreach ($upcomingMovies as $movie)
         <div style="background: white; border-radius: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease; border: 1px solid #eee;">
@@ -39,7 +44,6 @@
                 </p>
 
                 <div style="display: flex; gap: 0.5rem;">
-                    <!-- Read More Button -->
                     <a href="{{ route('movies.show', $movie->id) }}"
                         style="flex: 1; text-align: center; padding: 0.5rem; background-color: #3490dc; color: white; text-decoration: none; border-radius: 0.375rem; transition: background-color 0.2s ease; font-size: 0.875rem;"
                         onmouseover="this.style.backgroundColor='#2779bd'"
@@ -48,7 +52,6 @@
                     </a>
                 </div>
 
-                <!-- Schedules -->
                 <div style="margin-top: 1rem;">
                     @foreach ($movie->schedules as $schedule)
                         <form action="{{ route('cart.add', $schedule->id) }}" method="POST" style="margin-bottom: 1rem;">
@@ -66,4 +69,5 @@
         </div>
     @endforeach
 </div>
+@endif
 @endsection

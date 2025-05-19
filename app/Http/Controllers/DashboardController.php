@@ -24,7 +24,13 @@ class DashboardController extends Controller
             $users = User::all();
             $movies = Movie::all();
             $totalMovies = Movie::count();
-            $todayBookings = Order::count('status', 'paid');
+            $todayBookings = Order::where('status', 'paid')
+                ->whereDate('created_at', now())
+                ->count();
+                $totalRevenue = Order::where('status', 'paid')
+                
+                ->sum('total_amount');
+
 
             $scheduleStats = Schedule::with(['theatre', 'movie'])
                 ->get()
@@ -58,6 +64,7 @@ class DashboardController extends Controller
             // dd($scheduleStats);
 
 
+
             return view('admin.dashboard', [
                 'orders' => $orders,
                 'totalTicketsSold' => $totalTicketsSold,
@@ -66,6 +73,7 @@ class DashboardController extends Controller
                 'users' => $users,
                 'todayBookings' => $todayBookings,
                 'movies' => $movies,
+                'totalRevenue' => $totalRevenue,
                 // 'genres' => Genre::all(),
                 // 'languages' => Language::all(),
                 // 'theatres' => Theatre::all(),
@@ -90,7 +98,8 @@ class DashboardController extends Controller
 }
 
 public function todayBookings(){
-    $todayBookings = Order::where('statu', 'paid');
+  $todayBookings = Booking::whereDate('created_at', now())->count();
+
 
 
 }

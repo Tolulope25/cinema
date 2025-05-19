@@ -15,7 +15,7 @@
 </div>
 @endif
 <style>
-<<<<<<< HEAD
+
     .hero-section {
         position: relative;
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
@@ -23,21 +23,21 @@
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-=======
+
     /* Hero Section Styling */
     .hero-section {
         position: relative;
         background-image: url('https://images.unsplash.com/photo-1560264414-35b9e15f8f2f'); /* Replace with a cinema-related image */
         background-size: cover;
         background-position: center;
->>>>>>> origin/master
+
         color: white;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
-<<<<<<< HEAD
+
         overflow: hidden;
     }
 
@@ -109,7 +109,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-=======
+
         padding: 0 1rem;
     }
 
@@ -145,29 +145,29 @@
 
     .cta-btn:hover {
         background-color: #2779bd;
->>>>>>> origin/master
+
     }
 
     @media (max-width: 768px) {
         .hero-text h1 {
-<<<<<<< HEAD
+
             font-size: 2.5rem;
         }
 
         .hero-text p {
             font-size: 1.1rem;
-=======
+
             font-size: 2rem;
         }
 
         .hero-text p {
             font-size: 1rem;
->>>>>>> origin/master
+
         }
     }
 </style>
 
-<<<<<<< HEAD
+
 <div class="hero-section">
     <div class="hero-text">
         <h1>Where Magic Meets The Screen</h1>
@@ -176,17 +176,10 @@
     </div>
 </div>
 
-=======
->>>>>>> origin/master
+
 
     <!-- Welcome Box -->
-    <div class="hero-section">
-        <div class="hero-text">
-            <h1>Popcorn and Movies</h1>
-            <p>Your perfect movie experience starts here with a bowl of popcorn!</p>
-            <a href="#explore" class="cta-btn">Explore Now</a>
-        </div>
-    </div>
+
 
     <div class="container mt-5" id="explore">
         <div class="row">
@@ -240,17 +233,14 @@
     </div>
 
     <!-- Footer -->
-<<<<<<< HEAD
+
     {{-- <footer class="bg-dark text-white text-center py-3 mt-5">
         <p class="mb-0">Copyright &copy; 2010 <a href="#" class="text-light">SiteName</a> - All Rights Reserved</p>
         <p class="mb-0">Design by <a href="http://www.templatemonster.com/" class="text-light">TemplateMonster</a></p>
     </footer> --}}
-=======
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">Copyright &copy; 2010 <a href="#" class="text-light">SiteName</a> - All Rights Reserved</p>
-        <p class="mb-0">Design by <a href="http://www.templatemonster.com/" class="text-light">TemplateMonster</a></p>
-    </footer>
->>>>>>> origin/master
+
+
+
 </div>
 
 @endsection

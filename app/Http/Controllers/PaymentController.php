@@ -133,12 +133,13 @@ class PaymentController extends Controller
         $url = "https://api.paystack.co/transaction/initialize";
         $fields_string = http_build_query($formData);
         $ch = curl_init();
+        $secretKey = env('PAYSTACK_SECRET_KEY');
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . trim($secretKey),
             "Cache-Control: no-cache",
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -191,3 +192,4 @@ class PaymentController extends Controller
     }
 
 }
+

@@ -20,7 +20,7 @@
             <h1 style="font-size: 1.875rem; font-weight: 600; color: #0f172a;">Dashboard</h1>
             <div style="display: flex; gap: 1rem;">
                 {{-- <span style="font-weight: 500;">Welcome, {{ auth()->user()->name }}</span> --}}
-                <form method="GET" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" style="color: #dc2626;">Logout</button>
                 </form>
@@ -34,12 +34,12 @@
                 <p style="font-size: 1.5rem; font-weight: 600; color: #0f172a;">{{ $totalMovies }}</p>
             </div>
             <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);">
-                <h3 style="font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem;">{{ $todayBookings }}</h3>
-                {{-- <p style="font-size: 1.5rem; font-weight: 600; color: #0f172a;">{{ $todayBookings }}</p> --}}
+                <h3 style="font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem;">Today Bookings</h3>
+                <p style="font-size: 1.5rem; font-weight: 600; color: #0f172a;">{{ $todayBookings }}</p>
             </div>
             <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);">
                 <h3 style="font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem;">Total Revenue</h3>
-                {{-- <p style="font-size: 1.5rem; font-weight: 600; color: #0f172a;">${{ number_format($totalRevenue, 2) }}</p> --}}
+                <p style="font-size: 1.5rem; font-weight: 600; color: #0f172a;">₦{{ number_format($totalRevenue, 2) }}</p>
             </div>
 
 
@@ -127,7 +127,7 @@
     </td>
     <td style="padding: 0.75rem;">{{ $order->email }}</td>
     <td style="padding: 0.75rem;">{{ $order->created_at->format('Y-m-d') }}</td>
-    <td style="padding: 0.75rem;">${{ number_format($order->total_amount, 2) }}</td>
+    <td style="padding: 0.75rem;">₦{{ number_format($order->total_amount, 2) }}</td>
     <td style="padding: 0.75rem;">
         <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;
             {{ $order->status === 'paid' ? 'background-color: #dcfce7; color: #166534;' :
@@ -162,10 +162,10 @@
     {{ dd($movie->release_date, $movie->end_date) }}
 @endforeach --}}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
+
+
+
     <tr class="hover:bg-gray-50">
             <td class="px-4 py-3 font-semibold text-gray-800">{{ $movie->id }}</td>
             <td class="px-4 py-3 text-center">{{ $movie->title }}</td>

@@ -334,12 +334,34 @@ protected function uploadFile($file, $directory)
                     })
                     ->exists();
 
-                    Schedule::create([
-                        'theatre_id' => $theatre_id,
-                        'show_date' => $show_date,
-                        'show_time' => $show_time,
-                        'movie_id' => $movie->id,
-                    ]);
+                  // Add the buffer conflict check here
+    $bufferConflict = Schedule::where('theatre_id', $theatre_id)
+    ->where('show_date', $show_date)
+    ->where(function ($query) use ($showStartTime, $showEndTime) {
+        $query->whereExists(function ($subquery) use ($showStartTime, $showEndTime) {
+            $subquery->select(DB::raw(1))
+                ->from('movies')
+                ->whereColumn('movies.id', 'schedules.movie_id')
+                ->where(function ($innerQuery) use ($showStartTime, $showEndTime) {
+                    // Ensure 10-minute gap before and after any movie
+                    $innerQuery
+                        ->where(DB::raw("DATE_ADD(schedules.show_time, INTERVAL movies.duration + 10 MINUTE)"), '>', $showStartTime)
+                        ->where('schedules.show_time', '<', DB::raw("DATE_ADD('$showEndTime', INTERVAL 10 MINUTE)"));
+                });
+        });
+    })
+    ->exists();
+
+if ($bufferConflict) {
+    throw new \Exception('Schedule conflict: There must be a 10-minute gap before and after any movie in theatre ID ' . $theatre_id);
+}
+
+Schedule::create([
+    'theatre_id' => $theatre_id,
+    'show_date' => $show_date,
+    'show_time' => $show_time,
+    'movie_id' => $movie->id,
+]);
                 }
             }
 
@@ -422,14 +444,7 @@ protected function uploadFile($file, $directory)
 
         // Run the query to get now showing movies
         $nowShowing = Movie::whereHas('schedules', function ($query) use ($now) {
-            // Log the show_date, show_time, and calculated end time for debugging
-            \Log::debug('Executing Schedule Query', [
-                'show_date' => $now->toDateString(),
-                'show_time' => $now->toTimeString(),
-                'calculated_end_time' => $now->toTimeString()
-            ]);
-
-            $query->where('show_date', $now->toDateString())
+         $query->where('show_date', $now->toDateString())
                 ->where('show_time', '<=', $now->toTimeString())
                 ->whereRaw(
                     "DATE_ADD(show_time, INTERVAL (SELECT duration FROM movies WHERE movies.id = schedules.movie_id) MINUTE) >= ?",
@@ -437,13 +452,7 @@ protected function uploadFile($file, $directory)
                 );
         })
         ->where(function ($query) use ($now) {
-            // Log the conditions for end_date filtering
-            \Log::debug('Filtering by end_date', [
-                'current_date' => $now->toDateString()
-            ]);
-
-            // Include movies with no end date or end date greater than or equal to today
-            $query->whereNull('end_date')
+           $query->whereNull('end_date')
                   ->orWhere('end_date', '>=', $now->toDateString());
         })
         ->with('schedules')

@@ -182,6 +182,7 @@ class CartComponent extends Component
 
 
 
+
     public function updateQuantity($scheduleId, $action)
     {
         $schedule = Schedule::with('theatre')->find($scheduleId);
@@ -379,3 +380,4 @@ class CartComponent extends Component
         'totalAmount' => $this->totalAmount,])->layout('layouts.app');
     }
 }
+
